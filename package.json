@@ -1,0 +1,39 @@
+{
+  "name": "Elecnote",
+  "version": "0.0.1",
+  "description": "Evernote Client Based On Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "Evernote",
+    "Electron"
+  ],
+  "author": "sherluok",
+  "license": "ISC",
+  "dependencies": {
+    "antd": "^2.5.0",
+    "evernote": "^1.25.82",
+    "nodemailer": "^2.6.4"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-plugin-antd": "^0.5.1",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-3": "^6.17.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.26.0",
+    "electron": "^1.4.8",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.3",
+    "webpack-node-externals": "^1.5.4"
+  }
+}
