@@ -59,23 +59,19 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _Toolbar = __webpack_require__(88);
-	
-	var _Toolbar2 = _interopRequireDefault(_Toolbar);
-	
-	var _Notebooks = __webpack_require__(94);
+	var _Notebooks = __webpack_require__(88);
 	
 	var _Notebooks2 = _interopRequireDefault(_Notebooks);
 	
-	var _Notebook = __webpack_require__(98);
+	var _Notebook = __webpack_require__(92);
 	
 	var _Notebook2 = _interopRequireDefault(_Notebook);
 	
-	var _Note = __webpack_require__(99);
+	var _Note = __webpack_require__(93);
 	
 	var _Note2 = _interopRequireDefault(_Note);
 	
-	__webpack_require__(102);
+	__webpack_require__(101);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -153,232 +149,7 @@
 	  value: true
 	});
 	
-	var _button = __webpack_require__(89);
-	
-	var _button2 = _interopRequireDefault(_button);
-	
-	var _icon = __webpack_require__(90);
-	
-	var _icon2 = _interopRequireDefault(_icon);
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(86);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _email2kindle = __webpack_require__(91);
-	
-	var _email2kindle2 = _interopRequireDefault(_email2kindle);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ToolBar = function (_Component) {
-	  _inherits(ToolBar, _Component);
-	
-	  function ToolBar(props) {
-	    _classCallCheck(this, ToolBar);
-	
-	    var _this = _possibleConstructorReturn(this, (ToolBar.__proto__ || Object.getPrototypeOf(ToolBar)).call(this, props));
-	
-	    _this.state = {};
-	    _this.send = _this.send.bind(_this);
-	    return _this;
-	  }
-	
-	  _createClass(ToolBar, [{
-	    key: 'send',
-	    value: function send() {
-	      console.log('send...');
-	      return;
-	      (0, _email2kindle2.default)([this.state]).then(function (info) {
-	        if (info.accepted.length > 0) {
-	          console.info('Email Success @', info.accepted.join(', '));
-	        }
-	        if (info.rejected.length > 0) {
-	          console.warn('Email Fail @', info.rejected.join(', '));
-	        }
-	      }).catch(function (err) {
-	        console.error(err);
-	      });
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { id: 'toolbar' },
-	        _react2.default.createElement(
-	          _button2.default,
-	          { className: 'button', type: 'primary', size: 'small', onClick: this.send },
-	          '\u53D1\u9001\u5230kindle',
-	          _react2.default.createElement(_icon2.default, { type: 'upload' })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return ToolBar;
-	}(_react.Component);
-	
-	exports.default = ToolBar;
-
-/***/ },
-
-/***/ 89:
-/***/ function(module, exports) {
-
-	module.exports = require("antd/lib/button");
-
-/***/ },
-
-/***/ 90:
-/***/ function(module, exports) {
-
-	module.exports = require("antd/lib/icon");
-
-/***/ },
-
-/***/ 91:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = email2kindle;
-	
-	var _Email = __webpack_require__(92);
-	
-	var _Email2 = _interopRequireDefault(_Email);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var email = new _Email2.default({
-	  host: 'smtp.qq.com',
-	  port: 465,
-	  auth: {
-	    user: 'sisipedia@qq.com',
-	    pass: 'ffgrhpkqwejvdfdj'
-	  },
-	  secure: true
-	});
-	
-	email.setReceiver(['1054334756@kindle.cn']);
-	
-	function email2kindle(notes) {
-	  var subject = 'convert';
-	  var attachments = notes.map(function (note) {
-	    return _Email2.default.evernote2attachment(note);
-	  });
-	  return email.send({ subject: subject, attachments: attachments });
-	}
-
-/***/ },
-
-/***/ 92:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _nodemailer = __webpack_require__(93);
-	
-	var _nodemailer2 = _interopRequireDefault(_nodemailer);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var Email = function () {
-	  // https://github.com/nodemailer/nodemailer#send-using-smtp
-	  function Email(options) {
-	    _classCallCheck(this, Email);
-	
-	    this.transporter = _nodemailer2.default.createTransport(options);
-	    this.from = '"' + options.auth.name + '"<' + options.auth.user + '>';
-	    this.to = '';
-	    this.data = {};
-	  }
-	
-	  _createClass(Email, [{
-	    key: 'setReceiver',
-	    value: function setReceiver(receivers) {
-	      this.to = receivers.join(', ');
-	      return this;
-	    }
-	
-	    // https://github.com/nodemailer/nodemailer#sending-mail
-	
-	  }, {
-	    key: 'send',
-	    value: function send(partOfData) {
-	      var _this = this;
-	
-	      var data = _extends({
-	        from: this.from,
-	        to: this.to,
-	        subject: '',
-	        text: '\n'
-	      }, partOfData);
-	      return new Promise(function (resolve, reject) {
-	        _this.transporter.sendMail(data, function (err, info) {
-	          if (err) return reject(err);
-	          resolve(info);
-	        });
-	      });
-	    }
-	  }], [{
-	    key: 'evernote2attachment',
-	    value: function evernote2attachment(note) {
-	      var body = note.content.replace('<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">', '');
-	      var html = '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head><body>' + body + '</body></html>';
-	      return {
-	        filename: note.title + '.html',
-	        encoding: 'utf-8',
-	        content: html
-	      };
-	    }
-	  }]);
-	
-	  return Email;
-	}();
-	
-	exports.default = Email;
-
-/***/ },
-
-/***/ 93:
-/***/ function(module, exports) {
-
-	module.exports = require("nodemailer");
-
-/***/ },
-
-/***/ 94:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _menu = __webpack_require__(95);
+	var _menu = __webpack_require__(89);
 	
 	var _menu2 = _interopRequireDefault(_menu);
 	
@@ -390,11 +161,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Evernote = __webpack_require__(96);
+	var _Evernote = __webpack_require__(90);
 	
 	var _Evernote2 = _interopRequireDefault(_Evernote);
 	
-	var _Notebook = __webpack_require__(98);
+	var _Notebook = __webpack_require__(92);
 	
 	var _Notebook2 = _interopRequireDefault(_Notebook);
 	
@@ -563,14 +334,14 @@
 
 /***/ },
 
-/***/ 95:
+/***/ 89:
 /***/ function(module, exports) {
 
 	module.exports = require("antd/lib/menu");
 
 /***/ },
 
-/***/ 96:
+/***/ 90:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -579,7 +350,7 @@
 	  value: true
 	});
 	
-	var _require$Evernote = __webpack_require__(97).Evernote,
+	var _require$Evernote = __webpack_require__(91).Evernote,
 	    Client = _require$Evernote.Client,
 	    NoteFilter = _require$Evernote.NoteFilter,
 	    NotesMetadataResultSpec = _require$Evernote.NotesMetadataResultSpec;
@@ -645,14 +416,14 @@
 
 /***/ },
 
-/***/ 97:
+/***/ 91:
 /***/ function(module, exports) {
 
 	module.exports = require("evernote");
 
 /***/ },
 
-/***/ 98:
+/***/ 92:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -661,7 +432,7 @@
 	  value: true
 	});
 	
-	var _menu = __webpack_require__(95);
+	var _menu = __webpack_require__(89);
 	
 	var _menu2 = _interopRequireDefault(_menu);
 	
@@ -671,11 +442,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Evernote = __webpack_require__(96);
+	var _Evernote = __webpack_require__(90);
 	
 	var _Evernote2 = _interopRequireDefault(_Evernote);
 	
-	var _Note = __webpack_require__(99);
+	var _Note = __webpack_require__(93);
 	
 	var _Note2 = _interopRequireDefault(_Note);
 	
@@ -790,7 +561,7 @@
 
 /***/ },
 
-/***/ 99:
+/***/ 93:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -799,19 +570,19 @@
 	  value: true
 	});
 	
-	var _button = __webpack_require__(89);
+	var _button = __webpack_require__(94);
 	
 	var _button2 = _interopRequireDefault(_button);
 	
-	var _icon = __webpack_require__(90);
+	var _icon = __webpack_require__(95);
 	
 	var _icon2 = _interopRequireDefault(_icon);
 	
-	var _spin = __webpack_require__(100);
+	var _spin = __webpack_require__(96);
 	
 	var _spin2 = _interopRequireDefault(_spin);
 	
-	var _notification = __webpack_require__(101);
+	var _notification = __webpack_require__(97);
 	
 	var _notification2 = _interopRequireDefault(_notification);
 	
@@ -821,11 +592,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Evernote = __webpack_require__(96);
+	var _Evernote = __webpack_require__(90);
 	
 	var _Evernote2 = _interopRequireDefault(_Evernote);
 	
-	var _email2kindle = __webpack_require__(91);
+	var _email2kindle = __webpack_require__(98);
 	
 	var _email2kindle2 = _interopRequireDefault(_email2kindle);
 	
@@ -946,37 +717,175 @@
 
 /***/ },
 
-/***/ 100:
+/***/ 94:
+/***/ function(module, exports) {
+
+	module.exports = require("antd/lib/button");
+
+/***/ },
+
+/***/ 95:
+/***/ function(module, exports) {
+
+	module.exports = require("antd/lib/icon");
+
+/***/ },
+
+/***/ 96:
 /***/ function(module, exports) {
 
 	module.exports = require("antd/lib/spin");
 
 /***/ },
 
-/***/ 101:
+/***/ 97:
 /***/ function(module, exports) {
 
 	module.exports = require("antd/lib/notification");
 
 /***/ },
 
-/***/ 102:
+/***/ 98:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = email2kindle;
+	
+	var _Email = __webpack_require__(99);
+	
+	var _Email2 = _interopRequireDefault(_Email);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var email = new _Email2.default({
+	  host: 'smtp.qq.com',
+	  port: 465,
+	  auth: {
+	    user: 'sisipedia@qq.com',
+	    pass: 'ffgrhpkqwejvdfdj'
+	  },
+	  secure: true
+	});
+	
+	email.setReceiver(['1054334756@kindle.cn']);
+	
+	function email2kindle(notes) {
+	  var subject = 'convert';
+	  var attachments = notes.map(function (note) {
+	    return _Email2.default.evernote2attachment(note);
+	  });
+	  return email.send({ subject: subject, attachments: attachments });
+	}
+
+/***/ },
+
+/***/ 99:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _nodemailer = __webpack_require__(100);
+	
+	var _nodemailer2 = _interopRequireDefault(_nodemailer);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Email = function () {
+	  // https://github.com/nodemailer/nodemailer#send-using-smtp
+	  function Email(options) {
+	    _classCallCheck(this, Email);
+	
+	    this.transporter = _nodemailer2.default.createTransport(options);
+	    this.from = '"' + options.auth.name + '"<' + options.auth.user + '>';
+	    this.to = '';
+	    this.data = {};
+	  }
+	
+	  _createClass(Email, [{
+	    key: 'setReceiver',
+	    value: function setReceiver(receivers) {
+	      this.to = receivers.join(', ');
+	      return this;
+	    }
+	
+	    // https://github.com/nodemailer/nodemailer#sending-mail
+	
+	  }, {
+	    key: 'send',
+	    value: function send(partOfData) {
+	      var _this = this;
+	
+	      var data = _extends({
+	        from: this.from,
+	        to: this.to,
+	        subject: '',
+	        text: '\n'
+	      }, partOfData);
+	      return new Promise(function (resolve, reject) {
+	        _this.transporter.sendMail(data, function (err, info) {
+	          if (err) return reject(err);
+	          resolve(info);
+	        });
+	      });
+	    }
+	  }], [{
+	    key: 'evernote2attachment',
+	    value: function evernote2attachment(note) {
+	      var body = note.content.replace('<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n<!DOCTYPE en-note SYSTEM "http://xml.evernote.com/pub/enml2.dtd">', '');
+	      var html = '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></head><body>' + body + '</body></html>';
+	      return {
+	        filename: note.title + '.html',
+	        encoding: 'utf-8',
+	        content: html
+	      };
+	    }
+	  }]);
+	
+	  return Email;
+	}();
+	
+	exports.default = Email;
+
+/***/ },
+
+/***/ 100:
+/***/ function(module, exports) {
+
+	module.exports = require("nodemailer");
+
+/***/ },
+
+/***/ 101:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(103);
+	var content = __webpack_require__(102);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(105)(content, {});
+	var update = __webpack_require__(104)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./index.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/less-loader/index.js!./index.less");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./index.less", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./index.less");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -987,10 +896,10 @@
 
 /***/ },
 
-/***/ 103:
+/***/ 102:
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(104)();
+	exports = module.exports = __webpack_require__(103)();
 	// imports
 	
 	
@@ -1002,7 +911,7 @@
 
 /***/ },
 
-/***/ 104:
+/***/ 103:
 /***/ function(module, exports) {
 
 	/*
@@ -1059,7 +968,7 @@
 
 /***/ },
 
-/***/ 105:
+/***/ 104:
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

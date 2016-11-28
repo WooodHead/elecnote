@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var nodeExternals = require('webpack-node-externals');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var APP_PATH = path.resolve(__dirname, '');
+var APP_PATH = path.resolve(__dirname, 'app');
 var SRC_PATH = path.resolve(__dirname, 'src');
 
 module.exports = {
@@ -12,13 +12,14 @@ module.exports = {
 
   devtool: 'source-map',
   entry: {
-    index: './src'
+    index: './src/index',
+    setting: './src/setting',
   },
   output: {
     path: APP_PATH,
-    filename: '[name].js',
-    chunkFilename: '[chunkhash].js',
-    sourceMapFilename: '[name].map'
+    filename: '[name]/index.js',
+    chunkFilename: '[name]/[chunkhash].js',
+    sourceMapFilename: '[name]/index.map'
   },
   module: {
     loaders: [
@@ -38,7 +39,8 @@ module.exports = {
   plugins: [
     new webpack.optimize.DedupePlugin(),
     new CopyWebpackPlugin([
-      // { from: path.resolve(SRC_PATH, 'index.html'), to: 'index.html' },
+      { from: path.resolve(SRC_PATH, 'index/index.html'), to: path.resolve(APP_PATH, 'index/index.html') },
+      { from: path.resolve(SRC_PATH, 'setting/index.html'), to: path.resolve(APP_PATH, 'setting/index.html') },
     ])
   ]
 };

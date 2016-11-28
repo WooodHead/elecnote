@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Icon } from 'antd';
-import Evernote from '../utils/Evernote';
-import email2kindle from '../utils/email2kindle';
+import { Button, Icon, Spin, notification } from 'antd';
+import Evernote from '../../utils/Evernote';
+import email2kindle from '../../utils/email2kindle';
 
 export default class Note extends Component {
   constructor(props) {
@@ -9,6 +9,7 @@ export default class Note extends Component {
     this.state = {
       title: '',
       content: '',
+      sending: false,
     };
     this.send = this.send.bind(this);
   }
@@ -28,32 +29,50 @@ export default class Note extends Component {
   }
 
   send() {
-    // console.log('send...');
-    // return;
-    
+    this.setState({sending: true});
+    const { title, content } = this.state;
     email2kindle([this.state]).then(info => {
+      this.setState({sending: false});
       if (info.accepted.length > 0) {
         console.info('Email Success @',info.accepted.join(', '));
+        notification.success({
+          message: '推送成功！',
+          description: title,
+        })
       }
       if (info.rejected.length > 0) {
         console.warn('Email Fail @',info.rejected.join(', '));
+        notification.error({
+          message: '推送失败！',
+          description: title,
+        })
       }
     }).catch(err => {
+      this.setState({sending: false});
       console.error(err);
+      notification.error({
+        message: '程序出现了问题！',
+      })
+    }).done(() => {
+      this.setState({sending: false});
     })
   }
 
   render() {
     const { title } = this.props;
-    const { content } = this.state;
+    const { content, sending } = this.state;
+    console.log(sending);
     return (
       <div id="note">
-        <div id="note-top">
-          <div className="title">{title}</div>
+        <div className="top">
+          {title}
+          {sending ?
+            <Spin className="spin" size="small" /> :
             <Button className="button" type="ghost" size="small" onClick={this.send}>
               发送到kindle
               <Icon type="upload" />
             </Button>
+          }
         </div>
         <div id="note-content"></div>
       </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Menu } from 'antd';
-import Evernote from '../utils/Evernote';
+import Evernote from '../../utils/Evernote';
 import Note from './Note';
 
 export default class Notebook extends Component {
@@ -31,6 +31,7 @@ export default class Notebook extends Component {
 
   onSelect({key}) {
     const note = this.state.notes.find(({guid}) => guid === key);
+    this.setState({selectedKeys: [key]});
     this.props.onSelect(note);
   }
 

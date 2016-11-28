@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Menu } from 'antd';
-import Evernote from '../utils/Evernote';
+import Evernote from '../../utils/Evernote';
 import Notebook from './Notebook';
 
 const SubMenu = Menu.SubMenu;

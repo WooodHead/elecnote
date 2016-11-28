@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Toolbar from './components/Toolbar';
 import Notebooks from './components/Notebooks';
 import Notebook from './components/Notebook';
 import Note from './components/Note';
