@@ -725,8 +725,6 @@
 	          message: '推送出现了问题！',
 	          description: '可能需要先设置你的SMTP邮箱!'
 	        });
-	      }).done(function () {
-	        _this3.setState({ sending: false });
 	      });
 	    }
 	  }, {
@@ -737,7 +735,6 @@
 	          content = _state2.content,
 	          sending = _state2.sending;
 	
-	      console.log(sending);
 	      return _react2.default.createElement(
 	        'div',
 	        { id: 'note' },

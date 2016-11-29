@@ -29,25 +29,20 @@ const setMenu = () => {
 
 let settingWindow = null;
 const openSettingWindow = () => {
+  indexWindow && indexWindow.close();
   settingWindow = new BrowserWindow({width: 600, height: 400});
   settingWindow.loadURL('file://' + __dirname + '/app/setting/index.html');
   // settingWindow.webContents.openDevTools();
-  settingWindow.on('closed', function() {
-    // console.log('setting window closed');
-    openIndexWindow();
-  });
   setMenu();
   return settingWindow;
 };
 
 let indexWindow = null;
 const openIndexWindow = () => {
+  settingWindow && settingWindow.close();
   indexWindow = new BrowserWindow({width: 1000, height: 500});
   indexWindow.loadURL('file://' + __dirname + '/app/index/index.html');
   // indexWindow.webContents.openDevTools();
-  indexWindow.on('closed', function() {
-    console.log('index window closed');
-  });
   setMenu();
   return indexWindow;
 };
@@ -55,6 +50,9 @@ const openIndexWindow = () => {
 const setIpcMain = () => {
   ipcMain.on('show-setting-window', () => {
     openSettingWindow();
+  });
+  ipcMain.on('show-index-window', () => {
+    openIndexWindow();
   });
 };
 

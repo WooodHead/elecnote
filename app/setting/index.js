@@ -85,7 +85,10 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var ipcRenderer = __webpack_require__(106).ipcRenderer;
+	
 	// https://dev.yinxiang.com/doc/articles/dev_tokens.php
+	
 	var Setting = function (_Component) {
 	  _inherits(Setting, _Component);
 	
@@ -134,7 +137,7 @@
 	          this.setState({ currentStep: this.state.currentStep + 1 });
 	          break;
 	        case 3:
-	          window.close();
+	          ipcRenderer.send('show-index-window');
 	          break;
 	        default:
 	          break;
@@ -554,6 +557,13 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ },
+
+/***/ 106:
+/***/ function(module, exports) {
+
+	module.exports = require("electron");
 
 /***/ },
 

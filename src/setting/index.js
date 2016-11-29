@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Steps, message, Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button } from 'antd';
 import './index.less';
+
+const ipcRenderer = require('electron').ipcRenderer;
+
 // https://dev.yinxiang.com/doc/articles/dev_tokens.php
 class Setting extends Component {
   constructor(props) {
@@ -38,7 +41,7 @@ class Setting extends Component {
         this.setState({currentStep: this.state.currentStep + 1});
         break;
       case 3:
-        window.close();
+        ipcRenderer.send('show-index-window');
         break;
       default:
         break;
