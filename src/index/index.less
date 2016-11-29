@@ -44,6 +44,22 @@ body, #render { .fixed }
   .full;
 }
 
+#init {
+  .fixed;
+  .flex(column);
+  align-items: center;
+  justify-content: center;
+}
+
+#init > .title {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: lighter;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  color: #aaaaa;
+}
+
 #notebooks, #notebook, #note {
   height: 100%;
   .flex(column);

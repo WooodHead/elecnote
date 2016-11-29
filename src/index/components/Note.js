@@ -51,7 +51,8 @@ export default class Note extends Component {
       this.setState({sending: false});
       console.error(err);
       notification.error({
-        message: '程序出现了问题！',
+        message: '推送出现了问题！',
+        description: '可能需要先设置你的SMTP邮箱!',
       })
     }).done(() => {
       this.setState({sending: false});

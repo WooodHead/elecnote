@@ -47,19 +47,19 @@
 
 	'use strict';
 	
-	var _button = __webpack_require__(94);
+	var _button = __webpack_require__(86);
 	
 	var _button2 = _interopRequireDefault(_button);
 	
-	var _form = __webpack_require__(112);
+	var _form = __webpack_require__(107);
 	
 	var _form2 = _interopRequireDefault(_form);
 	
-	var _input = __webpack_require__(110);
+	var _input = __webpack_require__(108);
 	
 	var _input2 = _interopRequireDefault(_input);
 	
-	var _steps = __webpack_require__(111);
+	var _steps = __webpack_require__(109);
 	
 	var _steps2 = _interopRequireDefault(_steps);
 	
@@ -67,15 +67,15 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _react = __webpack_require__(86);
+	var _react = __webpack_require__(87);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(87);
+	var _reactDom = __webpack_require__(88);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	__webpack_require__(108);
+	__webpack_require__(110);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -85,17 +85,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var steps = [{
-	  title: 'SMTP',
-	  content: 'First-content'
-	}, {
-	  title: 'Kindle',
-	  content: 'Second-content'
-	}, {
-	  title: 'Done',
-	  content: 'Last-content'
-	}];
-	
+	// https://dev.yinxiang.com/doc/articles/dev_tokens.php
 	var Setting = function (_Component) {
 	  _inherits(Setting, _Component);
 	
@@ -106,6 +96,7 @@
 	
 	    _this.state = {
 	      currentStep: 0,
+	      evernote: { value: localStorage.getItem('evernote'), placeholder: '印象笔记开发者 Token' },
 	      smtp: {
 	        host: { value: localStorage.getItem('host'), placeholder: '发送邮件服务器' },
 	        port: { value: localStorage.getItem('port'), placeholder: '端口号' },
@@ -123,21 +114,26 @@
 	    value: function next() {
 	      var _state = this.state,
 	          currentStep = _state.currentStep,
+	          evernote = _state.evernote,
 	          smtp = _state.smtp,
 	          kindle = _state.kindle;
 	
 	      switch (currentStep) {
 	        case 0:
+	          localStorage.setItem('evernote', evernote.value);
+	          this.setState({ currentStep: this.state.currentStep + 1 });
+	          break;
+	        case 1:
 	          Object.keys(smtp).forEach(function (name) {
 	            localStorage.setItem(name, smtp[name].value);
 	          });
 	          this.setState({ currentStep: this.state.currentStep + 1 });
 	          break;
-	        case 1:
+	        case 2:
 	          localStorage.setItem('kindle', kindle.value);
 	          this.setState({ currentStep: this.state.currentStep + 1 });
 	          break;
-	        case 2:
+	        case 3:
 	          window.close();
 	          break;
 	        default:
@@ -151,6 +147,7 @@
 	
 	      var _state2 = this.state,
 	          currentStep = _state2.currentStep,
+	          evernote = _state2.evernote,
 	          smtp = _state2.smtp,
 	          kindle = _state2.kindle;
 	
@@ -167,14 +164,30 @@
 	        _react2.default.createElement(
 	          _steps2.default,
 	          { current: currentStep },
-	          steps.map(function (item) {
-	            return _react2.default.createElement(_steps2.default.Step, { key: item.title, title: item.title });
-	          })
+	          _react2.default.createElement(_steps2.default.Step, { title: 'Evernote' }),
+	          _react2.default.createElement(_steps2.default.Step, { title: 'Smtp' }),
+	          _react2.default.createElement(_steps2.default.Step, { title: 'Kindle' }),
+	          _react2.default.createElement(_steps2.default.Step, { title: 'Done' })
 	        ),
 	        _react2.default.createElement(
 	          _form2.default,
 	          { horizontal: true, onSubmit: this.handleSubmit },
-	          currentStep === 0 && Object.keys(smtp).map(function (name) {
+	          currentStep === 0 && _react2.default.createElement(
+	            _form2.default.Item,
+	            _extends({ label: 'evernote' }, formItemLayout),
+	            _react2.default.createElement(_input2.default, _extends({}, evernote, {
+	              addonAfter: _react2.default.createElement(
+	                'a',
+	                { href: 'https://dev.yinxiang.com/doc/articles/dev_tokens.php' },
+	                '\u83B7\u53D6'
+	              ),
+	              onChange: function onChange(e) {
+	                _this2.state.evernote.value = e.target.value;
+	                _this2.forceUpdate();
+	              }
+	            }))
+	          ),
+	          currentStep === 1 && Object.keys(smtp).map(function (name) {
 	            return _react2.default.createElement(
 	              _form2.default.Item,
 	              _extends({ key: name, label: name }, formItemLayout),
@@ -184,7 +197,7 @@
 	                } }))
 	            );
 	          }),
-	          currentStep === 1 && _react2.default.createElement(
+	          currentStep === 2 && _react2.default.createElement(
 	            _form2.default.Item,
 	            _extends({ label: 'kindle' }, formItemLayout),
 	            _react2.default.createElement(_input2.default, _extends({}, kindle, { onChange: function onChange(e) {
@@ -198,7 +211,7 @@
 	            _react2.default.createElement(
 	              _button2.default,
 	              { type: 'primary', onClick: this.next, style: { width: '60%' } },
-	              currentStep === 2 ? '完成' : '下一步'
+	              currentStep === 3 ? '完成' : '下一步'
 	            )
 	          )
 	        )
@@ -216,21 +229,21 @@
 /***/ 86:
 /***/ function(module, exports) {
 
-	module.exports = require("react");
+	module.exports = require("antd/lib/button");
 
 /***/ },
 
 /***/ 87:
 /***/ function(module, exports) {
 
-	module.exports = require("react-dom");
+	module.exports = require("react");
 
 /***/ },
 
-/***/ 94:
+/***/ 88:
 /***/ function(module, exports) {
 
-	module.exports = require("antd/lib/button");
+	module.exports = require("react-dom");
 
 /***/ },
 
@@ -544,13 +557,34 @@
 
 /***/ },
 
+/***/ 107:
+/***/ function(module, exports) {
+
+	module.exports = require("antd/lib/form");
+
+/***/ },
+
 /***/ 108:
+/***/ function(module, exports) {
+
+	module.exports = require("antd/lib/input");
+
+/***/ },
+
+/***/ 109:
+/***/ function(module, exports) {
+
+	module.exports = require("antd/lib/steps");
+
+/***/ },
+
+/***/ 110:
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(109);
+	var content = __webpack_require__(111);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(104)(content, {});
@@ -571,7 +605,7 @@
 
 /***/ },
 
-/***/ 109:
+/***/ 111:
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(103)();
@@ -583,27 +617,6 @@
 	
 	// exports
 
-
-/***/ },
-
-/***/ 110:
-/***/ function(module, exports) {
-
-	module.exports = require("antd/lib/input");
-
-/***/ },
-
-/***/ 111:
-/***/ function(module, exports) {
-
-	module.exports = require("antd/lib/steps");
-
-/***/ },
-
-/***/ 112:
-/***/ function(module, exports) {
-
-	module.exports = require("antd/lib/form");
 
 /***/ }
 

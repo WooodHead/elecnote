@@ -1,16 +1,16 @@
 import Email from './Email';
 
 const email = new Email({
-  host: 'smtp.qq.com',
-  port: 465,
+  host: localStorage.getItem('host'),
+  port: localStorage.getItem('port'),
   auth: {
-    user: 'sisipedia@qq.com',
-    pass: 'ffgrhpkqwejvdfdj',
+    user: localStorage.getItem('user'),
+    pass: localStorage.getItem('pass'),
   },
   secure: true,
-})
+});
 
-email.setReceiver(['1054334756@kindle.cn']);
+email.setReceiver([localStorage.getItem('kindle')]);
 
 export default function email2kindle(notes) {
   const subject = 'convert';

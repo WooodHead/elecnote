@@ -1,5 +1,5 @@
 const { Client, NoteFilter, NotesMetadataResultSpec } = require('evernote').Evernote;
-const token = 'S=s18:U=3254f3:E=15ff9ce8116:C=158a21d5488:P=1cd:A=en-devtoken:V=2:H=2e82e1445653ecb1daa44702b7ccd863';
+const token = localStorage.getItem('evernote');
 const client = new Client({ token });
 
 const noteStore = client.getNoteStore('https://app.yinxiang.com/shard/s18/notestore');

@@ -4,7 +4,8 @@
   "description": "Evernote Client Based On Electron",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "app": "electron .",
+    "watch": "webpack --watch --color --progress"
   },
   "keywords": [
     "Evernote",
