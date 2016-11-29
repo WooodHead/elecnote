@@ -3,7 +3,7 @@
 [中文]() | [英文]()
 
 ### 预览
-![screen](./src/images/1)
+![screen](./src/images/1.png)
 
 ### 开发
 ```
