@@ -1,4 +1,5 @@
-## Elecnote
+![](https://github.com/sherluok/elecnote/blob/master/logo/export/repo-banner.png)
+
 [中文]() | [英文]()
 
 ### 介绍
